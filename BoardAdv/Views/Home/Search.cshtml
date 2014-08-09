@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BoardAdv.Models.AdvertVm>
+
+<table class="table table-condensed">
+    <tr>
+        <td><p>Тема</p></td>
+        <td><p>Описание</p></td>
+        <td><p>Имя пользователя</p> </td>
+        <td colspan="3"><p>Изображение</p> </td>
+    </tr>
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td><p>@b.Title</p></td>
+            <td><p><textarea rows="7" cols="60" readonly>@b.Description</textarea> </p></td>
+            <td><p>@b.UserName</p></td>
+            <td><img src="@b.ImagePath" style="width: 150px; height: 150px;" /></td>
+            @if (b.UserName == User.Identity.Name)
+            {
+                <td><a href="Home/EditAdvert/@b.AdvertID">Редактировать</a></td>
+                <td><a href="Home/DeleteAdvert/@b.AdvertID">Удалить</a></td>
+            }
+            else
+            {
+                <td></td>
+                <td></td>
+            }
+        </tr>
+    }
+</table>
+
+@if (@Model.FirstOrDefault() == null)
+{
+    <div id="page" class="hide">1</div>
+}
+else
+{
+    <div id="page" class="hide">@Model.FirstOrDefault().PageNumber</div>
+}
+ <a href="#" id="prevPage">Назад</a><a href="#" id="nextPage">Вперед</a>

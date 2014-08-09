@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BoardAdv.Models
+@model EditModel
+
+    <div>
+        <div class="col-md-offset-4 col-md-5">
+            <h3>Редактирование</h3>
+        </div>
+            @using (Html.BeginForm("EditAdvert", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                <input type="hidden" value="@ViewBag.AdvertID" name="AdvertID" />
+                <div class="form-group">
+                    @Html.LabelFor(u => u.Title, new { @class = "col-lg-4 control-label" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(u => u.Title, new { @class = "form-control", val = Model.Title })
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(u => u.Description, new { @class = "col-lg-4 control-label" })
+                    <div class="col-lg-3">
+                        @Html.TextAreaFor(u => u.Description, new { @class = "form-control", val = Model.Description })
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(u => u.Image, new { @class = "col-lg-4 control-label" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(u => u.Image, new { type = "file", @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-3 col-lg-offset-4">
+                        <button type="submit" class="btn btn-info">Редактировать</button>
+                    </div>
+                </div>
+            }
+
+        </div>

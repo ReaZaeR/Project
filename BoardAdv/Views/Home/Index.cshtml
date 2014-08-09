@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h3>Объявления @Model</h3>
+    <p>
+        Поиск :
+        @Html.TextBox("str", "", new { id = "search" })
+        <input type="button" value="Поиск" id="btnSearch" />
+    </p>
+
+    <p><a href="Home/Add">Добавить объявление</a></p>
+    <p><a href="Account/Logoff"> Выйти</a> </p>
+    <div id="ajax">
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        getAdverts($("#search").val(), $("#page").text());
+    })
+
+    $(document).on("click", "#btnSearch", function () {
+        getAdverts($("#search").val(), $("#page").text());
+    })
+
+    $(document).on("click", "#prevPage", function () {
+        getAdverts($("#search").val(), $("#page").text() - 1);
+    })
+
+    $(document).on("click", "#nextPage", function () {
+        getAdverts($("#search").val(), parseInt($("#page").text()) + 1);
+    })
+</script>
